@@ -4,7 +4,3 @@ hello.js
 var a=10;
 console.log(a);
 ```
-
-
-- [x] 任务1
-- [ ] 任务2
