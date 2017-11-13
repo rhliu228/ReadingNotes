@@ -47,9 +47,29 @@
 * 最小化重排和重绘：
   * 使用cssText属性
   * 批量修改DOM：使文档脱离文档流，对其应用多重改变、把元素带回文档中。其中使DOM脱离文档流的方法有：
-   >> 隐藏元素，应用修改，重新显示
-   >> 使用document fragment
-   >> 将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素
+   * 隐藏元素，应用修改，重新显示
+   * 使用document fragment
+   * 将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素
 * 缓存布局信息
 * 让元素脱离动画流
  4. 事件委托可减少事件处理器的数量
+ 
+## Chapter4 算法和流程控制
+1. 循环
+* for-in比标准for循环，do-while，while慢，因此for-in最好仅在需要迭代一个属性数量未知的对象时使用。
+* 基于函数的迭代forEach比基于循环的迭代慢8倍。
+* 使用“达夫设备”循环展开技术，可以做到一次迭代实际上执行了多次迭代的操作
+2. 条件语句：少条件的用if-else，多的用switch，当单个键和单个值之间存在逻辑映射时，使用查找表。
+3. 递归、迭代、memoization
+```
+ funciton memoize(func,cache){
+  cache=cache||{};
+  var shell=function(args){
+   if(!cache.hasOwnProperty(arg)){
+     cache[args]=func(arg);
+   }
+   return cache[arg];
+  }
+  return shell;
+ }
+```
