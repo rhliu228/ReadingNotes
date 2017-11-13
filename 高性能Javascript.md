@@ -24,4 +24,32 @@
  
 ## Chapter3 DOM编程
 1. 浏览器中的DOM
- * DOM是一个独立于语言，用于操作XML和HTML文档的程序接口，但是它在浏览器中的接口是用javascript实现的。浏览器会把DOM和javascript独立实现，它们之间只能通过接口彼此连接，这就造成访问DOM天生就慢。
+ * DOM是一个独立于语言，用于操作XML和HTML文档的程序接口，但是它在浏览器中的接口是用javascript实现的。浏览器会把DOM和javascript独立实现，它们之间只能通过接口彼此连接，这就造成访问DOM天生就慢。应该`减少访问DOM的次数，把运算尽量留在ECMAScript这一端来处理`
+2. DOM访问和修改
+* innerHTML比原生的DOM方法要快，这是因为在设置innerHTML或outerHTML的时候，就会创建一个HTML解析器，这个解析器是在浏览器级别的代码基础上运行的，因此比执行javascript快得多。不过，创建innerHTML解析器也会带来性能损失，所以最好能够将设置innerHTML的次数保持在合理的范围内。
+* 节点克隆：element.cloneNode()替代document.createElement()。
+* HTML集合以一种“假定实时态”的实时存在，这意味着底层文档对象更新时，它也会自动更新。
+* 遍历DOM，常见的不再赘述。需注意：document.querySelectorAll使用CSS选择器作为参数并返回一个NodeList，不返回HTML集合，因此返回的节点不会对应实时的文档结构。
+3. 重绘和重排
+* 渲染树：DOM树中每一个`需要显示`的节点在渲染树中至少存在一个对应的节点（隐藏的元素在渲染树中没有对应的节点），渲染树中的节点被称为“帧”或“盒boxes”，符合css模型的定义。一旦渲染树构建完成，浏览器就开始绘制页面元素。
+* 重排发生的时机
+  * 添加或删除可见的DOM元素
+  * 元素位置改变
+  * 元素尺寸改变（外边距，内边距，边框厚度，宽度，高度）
+  * 内容改变eg：文本改变或者图片被另一个不同尺寸的图片替代
+  * 页面渲染器初始化
+  * 浏览器窗口尺寸改变
+* 渲染树变化的排队和刷新：由于每次重排都会产生计算消耗，大多数浏览器通过队列化修改并批量执行来优化重排过程。然而，你写的代码会不知不觉强制刷新队列并要求计划任务立即执行。eg：
+  * offset(Top|Left|Width|Height)
+  * scroll(Top|Left|Width|Height)
+  * client(Top|Left|Width|Height)
+  * getComputedStyle()(currentStyle in IE)
+* 最小化重排和重绘：
+  * 使用cssText属性
+  * 批量修改DOM：使文档脱离文档流，对其应用多重改变、把元素带回文档中。其中使DOM脱离文档流的方法有：
+   * 隐藏元素，应用修改，重新显示
+   * 使用document fragment
+   * 将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素
+   * 缓存布局信息
+   * 让元素脱离动画流
+ 4. 事件委托可减少事件处理器的数量
