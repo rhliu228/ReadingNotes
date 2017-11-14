@@ -73,3 +73,18 @@
   return shell;
  }
 ```
+## Chapter5 字符串和正则表达式
+1. 字符串
+2. 正则表达式
+```
+String.prototype.trim=function(){
+  var str=this.replace(/^\s+/,""),
+  end=str.length-1,
+  ws=/\s/;
+  while(ws.test(str.charAt(end))){
+    end--;
+  }
+  return this.slice(0,end+1);
+  
+}
+```
