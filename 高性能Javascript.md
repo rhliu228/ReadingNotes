@@ -110,3 +110,26 @@ String.prototype.trim=function(){
    * XMLHttpRequest对象
    * close方法
 * 由于web workers有着不同的全局运行环境，因此你无法从js代码中创建它，必须使用 var worker=new Worker('code.js');语法，且使用事件接口进行通信，网页代码可以通过postMessage（）方法给worker传递数据，此外，worker还有一个用来接收信息的onmessage的事件处理器。
+
+## Chapter7 Ajax
+1. 请求数据的方法
+* XHR
+* 动态脚本注入
+* iframes
+* comet
+* Multipart
+2. 发送数据的方法
+* XHR
+* 图片信标
+3. 数据格式
+* XML
+* HTML
+* JSON
+* 自定义格式，使用split（）方法分割即可
+
+## Chapter8 编程实践
+1. 避免双重求值(eval,Function构造函数,setTimout,setInteval避免传入字符串)
+2. 使用Object/Array直接量
+3. 懒加载
+4. 预加载
+5. 巧妙使用位操作和原生js方法（例如Math对象）
