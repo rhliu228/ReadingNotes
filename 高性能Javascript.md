@@ -44,7 +44,7 @@
   * scroll(Top|Left|Width|Height)
   * client(Top|Left|Width|Height)
   * getComputedStyle()(currentStyle in IE)
-* 最小化重排和重绘：
+* 如何最小化重排和重绘
   * 使用cssText属性
   * 批量修改DOM：使文档脱离文档流，对其应用多重改变、把元素带回文档中。其中使DOM脱离文档流的方法有：
    * 隐藏元素，应用修改，重新显示
@@ -96,3 +96,17 @@ String.prototype.trim=function(){
   
 }
 ```
+## Chapter6 快速响应的用户界面
+1. 浏览器UI线程
+* 浏览器限制了javascipt的运行时间。包括两类限制：调用栈大小限制和长时间运行脚本限制，单个javascript的运行时间应远远小于浏览器的限制，一般来说，不应超过100ms。
+2. 使用定时器让出时间段
+3. web worker多线程
+* 由于web workers没有绑定UI线程，这意味它们不能访问浏览器的许多资源，运行环境由如下部分组成：
+  * navigator对象，只有appName,appVersion,userAgent,platform四个属性
+  * location对象，只读
+  * self对象，指向全局worker对象
+  * importScripts(),加载js文件
+  * 所有的ECMAScript对象
+  * XMLHttpRequest对象
+  * close方法
+* 由于web workers有着不同的全局运行环境，因此你无法从js代码中创建它，必须使用 var worker=new Worker('code.js');语法，且使用事件接口进行通信，网页代码可以通过postMessage（）方法给worker传递数据，此外，worker还有一个用来接收信息的onmessage的事件处理器。
