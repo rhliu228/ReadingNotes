@@ -95,7 +95,7 @@ arr
 // [[5], [5], [5]]
 ```
 #### 7. entries(),keys(),values():用于遍历数组。它们都返回一个遍历器对象，可以用for...of循环进行遍历，唯一的区别是keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
-#### includes():返回一个bool值，表示某个数组是否包含给定的值，该方法的第二个参数表示搜索的起始位置，默认为0。如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为-4，但数组长度为3），则会重置为从0开始。
+#### 8. includes():返回一个bool值，表示某个数组是否包含给定的值，该方法的第二个参数表示搜索的起始位置，默认为0。如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为-4，但数组长度为3），则会重置为从0开始。
 1.
 ```
 [1, 2, 3].includes(3, 3);  // false
@@ -109,7 +109,7 @@ arr
 3. 与Map和set的has方法的区别：
 Map 结构的has方法，是用来查找键名的，比如Map.prototype.has(key)、WeakMap.prototype.has(key)、Reflect.has(target, propertyKey)。
 Set 结构的has方法，是用来查找值的，比如Set.prototype.has(value)、WeakSet.prototype.has(value)。
-#### 8.数组的空位
+#### 9.数组的空位
 1. ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位。
 * forEach(), filter(), reduce(), every() 和some()都会跳过空位。
 * map()会跳过空位，但会保留这个值
