@@ -54,7 +54,7 @@ end：可选，到该位置前停止读取数据，默认为0，如果为负数�
 [1,4,-5,10].find((n)=>n<0);
 //-5
 ```
-``
+```
 [1, 5, 10, 15].find(function(value, index, arr) {
   return value > 9;
 }) // 10`
@@ -73,3 +73,39 @@ function f(v){
 let person = {name: 'John', age: 20};
 [10, 12, 26, 15].find(f, person);    // 26
 ```
+* fill()方法使用一个给定值填充数组
+1.
+```
+['a', 'b', 'c'].fill(7)
+// [7, 7, 7]
+
+new Array(3).fill(7)
+// [7, 7, 7]
+```
+2.fill方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。
+```
+['a', 'b', 'c'].fill(7, 1, 2)
+// ['a', 7, 'c']
+```
+3. 如果填充的类型为对象，那么被赋值的是同一个内存地址的对象，而不是深拷贝对象。
+```
+let arr = new Array(3).fill([]);
+arr[0].push(5);
+arr
+// [[5], [5], [5]]
+```
+* entries(),keys(),values():用于遍历数组。它们都返回一个遍历器对象，可以用for...of循环进行遍历，唯一的区别是keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
+* includes():返回一个bool值，表示某个数组是否包含给定的值，该方法的第二个参数表示搜索的起始位置，默认为0。如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为-4，但数组长度为3），则会重置为从0开始。
+1.
+```
+[1, 2, 3].includes(3, 3);  // false
+[1, 2, 3].includes(3, -1); // true
+```
+2. 与indexof的对比：indexOf方法有两个缺点，一是不够语义化，它的含义是找到参数值的第一个出现位置，所以要去比较是否不等于-1，表达起来不够直观。二是，它内部使用严格相等运算符（===）进行判断，这会导致对NaN的误判。
+```
+[NaN].indexOf(NaN)
+// -1
+```
+3.与Map和set的has方法的区别：
+Map 结构的has方法，是用来查找键名的，比如Map.prototype.has(key)、WeakMap.prototype.has(key)、Reflect.has(target, propertyKey)。
+Set 结构的has方法，是用来查找值的，比如Set.prototype.has(value)、WeakSet.prototype.has(value)。
