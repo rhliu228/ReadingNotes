@@ -29,7 +29,8 @@ tags:
 const insertSort = arr => {
     for(let i = 1; i< arr.length; i++) {
         let temp = arr[i];
-        for(let j = i; j > 0 && temp < arr[j-1]; j--) {
+        let j;
+        for(j = i; j > 0 && temp < arr[j-1]; j--) {
             arr[j] = arr[j-1];
         }
         arr[j] = temp;
